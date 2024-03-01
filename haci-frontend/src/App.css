@@ -1,0 +1,88 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.app-container {
+  display: flex;
+  height: 100vh; /* Full height of the viewport */
+  padding: 10px;
+}
+
+.code-editor {
+  flex: 0.5; /* Takes up 2/3 of the container */
+  flex-direction: row;
+  flex-grow: 1;
+  width: 100vw;
+  height: 1%; /* Full height of the container */
+}
+
+.side-panels {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Takes up 1/3 of the container */
+  height: 100%; /* Full height */
+}
+
+.errors-panel, .console-panel {
+  flex: 1; /* Each takes up half of the side panel */
+  margin: 5px 0; /* Spacing between panels */
+}
+
+/* Add any additional styling for borders, padding, etc. here */
+.code-editor, .errors-panel, .console-panel {
+  padding: 10px;
+  border: 1px solid #ccc; /* Example border */
+  overflow: auto; /* Adds scroll if content overflows */
+}
+
+.toolbar {
+  width: 100%;
+  padding: 10px;
+  background-color: #f0f0f0; /* Example background color */
+  text-align: right; /* Aligns the button to the right */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Optional: adds shadow for depth */
+}
+
+.panel {
+  border: 1px solid transparent; /* Default border */
+}
+
+.focused-panel {
+  border: 2px solid red; /* Red border for the focused panel */
+}

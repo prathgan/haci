@@ -1,0 +1,8 @@
+.errors-panel {
+	border: 1px solid var(--error-color);
+	margin: 10px;
+	padding: 10px;
+	max-height: 45%;
+	overflow-y: auto;
+	color: var(--error-color);
+  }
