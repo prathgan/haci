@@ -47,17 +47,17 @@ function App() {
         <RunCodeButton /> {/* This button is now part of the toolbar */}
       </div>
       <div className="app-container">
-        <div className={`panel ${getPanelClass('code')}`}>
+        <div className={` ${getPanelClass('code')}`}>
           <CodeEditor />
         </div>
-        <CodeEditor />
+        <CodeEditor focused={focusedPanel === 'code'}/>
         <div className="side-panels">
-        <div className={`panel ${getPanelClass('errors')}`}>
-          <ErrorsPanel />
-        </div>
-        <div className={`panel ${getPanelClass('console')}`}>
-          <ConsolePanel />
-        </div>
+          <div className={`${getPanelClass('errors')}`}>
+            <ErrorsPanel />
+          </div>
+          <div className={`${getPanelClass('console')}`}>
+            <ConsolePanel />
+          </div>
         </div>
       </div>
     </AppStateProvider>

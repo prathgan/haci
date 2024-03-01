@@ -7,7 +7,7 @@ import ace from 'ace-builds/src-noconflict/ace';
 import { useAppState } from './AppStateContext';
 import '../styles/CodeEditor.css';
 
-function CodeEditor() {
+function CodeEditor( { focused }) {
   const { code, setCode } = useAppState();
   const aceEditorRef = useRef();
   const markers = useRef({});
@@ -17,6 +17,21 @@ function CodeEditor() {
     //let markers = []; // Array to hold marker IDs
 
     if (editor) {
+
+
+      editor.setReadOnly(!focused);
+      if (focused) {
+        console.log("focusing")
+        editor.focus();
+      }
+
+      // Disable Ace Editor's default commands (shortcuts)
+      editor.commands.bindKeys({});
+      editor.commands.bindKey("Ctrl-j", null);
+      editor.commands.bindKey("Ctrl-k", null);
+      editor.commands.bindKey("Ctrl-l", null);
+
+
       // Ctrl + , = Drop marker 1
       editor.commands.addCommand({
         name: 'dropMarker1',
