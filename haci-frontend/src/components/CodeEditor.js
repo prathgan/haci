@@ -8,6 +8,9 @@ import { useAppState } from './AppStateContext';
 import '../styles/CodeEditor.css';
 
 function CodeEditor( { focused }) {
+
+  console.log("Rendering CodeEditor, focused:", focused); // Debugging statement
+
   const { code, setCode } = useAppState();
   const aceEditorRef = useRef();
   const markers = useRef({});

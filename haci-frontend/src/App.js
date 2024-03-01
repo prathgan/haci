@@ -44,18 +44,20 @@ function App() {
   return (
     <AppStateProvider>
       <div className="toolbar">
-        <RunCodeButton /> {/* This button is now part of the toolbar */}
+        <RunCodeButton /> {/* Assuming RunCodeButton is defined elsewhere */}
       </div>
       <div className="app-container">
-        <div className={` ${getPanelClass('code')}`}>
-          <CodeEditor />
-        </div>
-        <CodeEditor focused={focusedPanel === 'code'}/>
-        <div className="side-panels">
-          <div className={`${getPanelClass('errors')}`}>
+        <div className={`panel ${focusedPanel === 'code' ? 'focused-panel' : ''}`}></div>
+        
+        <CodeEditor focused={focusedPanel === 'code'} />
+
+        {/* <CodeEditor focused={focusedPanel === 'code'} /> */}
+        
+        <div className = 'side-panels'>
+          <div className={`panel ${focusedPanel === 'errors' ? 'focused-panel' : ''}`}>
             <ErrorsPanel />
           </div>
-          <div className={`${getPanelClass('console')}`}>
+          <div className={`panel ${focusedPanel === 'console' ? 'focused-panel' : ''}`}>
             <ConsolePanel />
           </div>
         </div>

@@ -49,7 +49,7 @@
   flex-direction: row;
   flex-grow: 1;
   width: 100vw;
-  height: 1%; /* Full height of the container */
+  height: 100vw; /* Full height of the container */
 }
 
 .side-panels {
@@ -77,6 +77,10 @@
   background-color: #f0f0f0; /* Example background color */
   text-align: right; /* Aligns the button to the right */
   box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Optional: adds shadow for depth */
+}
+
+.focused-panel {
+  border: 2px solid red;
 }
 
 .panel {
