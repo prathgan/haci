@@ -4,6 +4,8 @@ import CodeEditor from './components/CodeEditor';
 import ErrorsPanel from './components/ErrorsPanel';
 import ConsolePanel from './components/ConsolePanel';
 
+//testing new git commit
+
 import './App.css';
 
 function App() {
