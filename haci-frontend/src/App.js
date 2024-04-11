@@ -50,12 +50,12 @@ function App() {
       </div>
       <div className="app-container">
         <div className={`panel ${focusedPanel === 'code' ? 'focused-panel' : ''}`}></div>
-        
+
         <CodeEditor focused={focusedPanel === 'code'} />
 
         {/* <CodeEditor focused={focusedPanel === 'code'} /> */}
-        
-        <div className = 'side-panels'>
+
+        <div className='side-panels'>
           <div className={`panel ${focusedPanel === 'errors' ? 'focused-panel' : ''}`}>
             <ErrorsPanel />
           </div>
@@ -76,6 +76,32 @@ function RunCodeButton() {
 
   // In RunCodeButton component
   function executeCode() {
+    console.log("going to send message")
+    // Example of sending a command from the React app
+    const controlMotor = async (motor, action) => {
+      try {
+        const response = await fetch('http://localhost:3001/control-motor', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ motor, action }),
+        });
+
+        if (response.ok) {
+          console.log('Motor command sent successfully');
+        } else {
+          console.error('Failed to send motor command');
+        }
+      } catch (error) {
+        console.error('Error sending motor command:', error);
+      }
+    };
+
+    controlMotor('center', 'tap');
+
+
+
     let consoleOutput = `Run at: ${new Date().toLocaleTimeString()}\n`;
 
     // Clear errors at the start of each execution attempt
@@ -104,7 +130,7 @@ function RunCodeButton() {
     console.log = originalConsoleLog;
   }
 
-  
+
 
 
 
