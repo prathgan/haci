@@ -16,8 +16,6 @@ function CodeEditor({ focused, onExecuteCode }) {
   const markers = useRef({});
   const [granularity, setGranularity] = useState('token'); // New state for granularity
   const [isReadingCharacters, setIsReadingCharacters] = useState(false);
-  const [previousLineIndentation, setPreviousLineIndentation] = useState(0);
-
 
   const controlMotor = async (finger, action) => {
     try {
@@ -382,37 +380,35 @@ function CodeEditor({ focused, onExecuteCode }) {
         return match ? match[0].length : 0;
       };
 
-
       let previousLineIndentation = 0;
 
       // Event listener for cursor position change
       editor.getSession().selection.on('changeCursor', () => {
         const cursorPosition = editor.getCursorPosition();
         const currentLine = editor.session.getLine(cursorPosition.row);
+        const currentLineIndentation = getIndentationLevel(currentLine);
         const currentChar = currentLine[cursorPosition.column];
 
-        // Check for open and close brackets
+        if (currentLineIndentation > previousLineIndentation) {
+          // Indentation increased, tap fourth finger
+          controlMotor('fourth', 'tap');
+        } else if (currentLineIndentation < previousLineIndentation && cursorPosition.row !== 0) {
+          // Indentation decreased, tap right index finger
+          controlMotor('index', 'tap');
+        }
+
+        // Trigger motor for bracket detection
         if (currentChar === '{' || currentChar === '[') {
           controlMotor('thumb', 'tap');
         } else if (currentChar === '}' || currentChar === ']') {
           controlMotor('little', 'tap');
         }
 
-        // Your existing indentation logic can remain here
-        const currentLineIndentation = getIndentationLevel(currentLine);
-        if (currentLineIndentation > previousLineIndentation) {
-          controlMotor('fourth', 'tap'); // Indentation increased
-        } else if (currentLineIndentation < previousLineIndentation && cursorPosition.row !== 0) {
-          controlMotor('index', 'tap'); // Indentation decreased
-        }
-        setPreviousLineIndentation(currentLineIndentation);
+        previousLineIndentation = currentLineIndentation;
       });
-
-
 
       // Cleanup function to remove the event listener
       return () => {
-        editor.getSession().selection.off('changeCursor');
         editor.getSession().off('change', handleChange);
       };
 
